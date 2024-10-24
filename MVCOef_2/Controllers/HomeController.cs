@@ -20,21 +20,19 @@ namespace Interimkantoor.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Job> modellen = await _unitOfWork.JobRepository.GetAllAsync();
-            List<JobDetailsViewModel> viewModellen = _mapper.Map<List<JobDetailsViewModel>>(modellen);
+            IEnumerable<Job> modellen = await _unitOfWork.JobRepository.GetAllJobsAsync();
+            List<JobDetailsViewModel> viewModels = new List<JobDetailsViewModel>();
 
-            // Manuele mapping => Niet doen, tijdrovend en foutgevoelig
-            //foreach (var job in jobs)
-            //{
-            //    JobDetailsViewModel vm = new JobDetailsViewModel
-            //    {
-            //        Id = job.Id,
-            //        Omschrijving = job.Omschrijving,
-            //        AantalPlaatsen = job.AantalPlaatsen,
-            //    }
-            //}
+            foreach (Job job in modellen)
+            {
+                int aantalBezettePlaatsen = job.KlantJobs?.Count ?? 0;
+                JobDetailsViewModel vm = _mapper.Map<JobDetailsViewModel>(job);
+                vm.VrijePlaatsen = job.AantalPlaatsen - aantalBezettePlaatsen;
 
-            return View(viewModellen);
+                viewModels.Add(vm);
+            }
+
+            return View(viewModels);
         }
 
         public IActionResult Privacy()

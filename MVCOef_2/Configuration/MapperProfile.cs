@@ -6,6 +6,7 @@
         {
             CreateMap<Job, JobDetailsViewModel>()
                 .ForMember(dest => dest.Beschrijving, x => x.MapFrom(src => src.Omschrijving));
+
         }
     }
 }
