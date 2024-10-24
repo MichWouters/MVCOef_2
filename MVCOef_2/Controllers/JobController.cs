@@ -5,16 +5,22 @@ namespace Interimkantoor.Controllers
     public class JobController : Controller
     {
         private readonly IUnitOfWork _context;
+        private IMapper _mapper;
 
-        public JobController(IUnitOfWork context)
+        public JobController(IUnitOfWork context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Job
         public async Task<IActionResult> Index()
         {
-            return View(await _context.JobRepository.GetAllJobsAsync());
+            var models = await _context.JobRepository.GetAllJobsAsync();
+            JobIndexViewModel vm = new ();
+            vm.Vacatures = models.ToList();
+
+            return View(vm);
         }
 
         // GET: Job/Details/5
@@ -116,12 +122,14 @@ namespace Interimkantoor.Controllers
             }
 
             var job = await _context.JobRepository.GetByIdAsync(id);
+            JobDeleteViewModel vm = _mapper.Map<JobDeleteViewModel>(job);
+
             if (job == null)
             {
                 return NotFound();
             }
 
-            return View(job);
+            return View(vm);
         }
 
         // POST: Job/Delete/5

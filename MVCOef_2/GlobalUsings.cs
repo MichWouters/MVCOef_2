@@ -14,3 +14,4 @@ global using Microsoft.EntityFrameworkCore;
 global using System.ComponentModel.DataAnnotations;
 global using System.Linq.Expressions;
 global using System.Text.Json.Serialization;
+global using MVCOef_2.ViewModels;
