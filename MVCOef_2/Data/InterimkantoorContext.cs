@@ -34,6 +34,8 @@ namespace Interimkantoor.Data
                 .WithMany(x => x.KlantJobs)
                 .HasForeignKey(y => y.JobId)
                 .OnDelete(deleteBehavior: DeleteBehavior.Restrict);
+
+            SeedData(modelBuilder);
         }
 
         private void SeedData(ModelBuilder modelbuilder)
