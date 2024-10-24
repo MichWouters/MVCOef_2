@@ -1,0 +1,16 @@
+﻿global using AutoMapper;
+global using Interimkantoor;
+global using Interimkantoor.Data;
+global using Interimkantoor.Data.Repository;
+global using Interimkantoor.Data.UnitOfWork;
+global using Interimkantoor.Models;
+global using Interimkantoor.ViewModels;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel.DataAnnotations;
+global using System.Linq.Expressions;
+global using System.Text.Json.Serialization;

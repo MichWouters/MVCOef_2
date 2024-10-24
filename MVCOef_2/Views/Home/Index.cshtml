@@ -1,0 +1,45 @@
+﻿@model List<JobDetailsViewModel>;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1 class="text-center">Welkom op de vacatureSite</h1>
+    <img src="~/images/Werkman!.jpg" class="center" />
+</div>
+
+<h2>Openstaande vacatures</h2>
+
+@if (Model.Count > 0)
+{
+    @foreach (JobDetailsViewModel vacature in Model)
+    {
+        <div class="card border-danger m-2">
+            <div class="card-body bg-primary">
+                <h5 class="card-title" style="color: white">@vacature.Beschrijving</h5>
+                <p class="card-text">@vacature.Locatie</p>
+                <p class="card-text">@vacature.StartDatum.ToShortDateString()</p>
+                <p class="card-text">@vacature.EindDatum.ToShortDateString()</p>
+
+                @if (vacature.IsBadge)
+                {
+                    <p>Badge: Vereist</p>
+                }
+                @if (vacature.IsKleding)
+                {
+                    <p>Werkkledij: Vereist</p>
+                }
+                @if (vacature.IsWerkSchoenen)
+                {
+                    <p>WerkSchoenen: Vereist</p>
+                }
+
+                <p>Beschikbare plaatsen: @vacature.VrijePlaatsen / @vacature.AantalPlaatsen</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h3>Geen vacatures gevonden!</h3>
+}
